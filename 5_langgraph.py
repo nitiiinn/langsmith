@@ -9,6 +9,9 @@ from pydantic import BaseModel, Field
 from langsmith import traceable
 from langchain_groq import ChatGroq
 from langgraph.graph import StateGraph, START, END
+import os
+
+os.environ['LANGSMITH_PROJECT']='Essay evaluation workflow'
 
 # ---------- Setup ----------
 load_dotenv()
