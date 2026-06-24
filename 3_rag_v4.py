@@ -19,6 +19,8 @@ from langchain_core.output_parsers import StrOutputParser
 
 load_dotenv()
 
+os.environ['LANGSMITH_PROJECT']='RAG Chattbot'
+
 PDF_PATH = "islr.pdf"  # change to your file
 INDEX_ROOT = Path(".indices")
 INDEX_ROOT.mkdir(exist_ok=True)

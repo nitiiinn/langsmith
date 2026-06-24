@@ -16,15 +16,17 @@ from langchain_core.output_parsers import StrOutputParser
 
 load_dotenv()
 
+os.environ['LANGSMITH_PROJECT']='RAG Chattbot'
+
 PDF_PATH = "islr.pdf"  # <- change to your file
 
 # ----------------- helpers (not traced individually) -----------------
-@traceable(name="load_pdf")
+@traceable(name="load_pdf",tags=['pdf loader'],metadata={'pdf loader':'PyPDFLoader'})
 def load_pdf(path: str):
     loader = PyPDFLoader(path)
     return loader.load()  # list[Document]
 
-@traceable(name="split_documents")
+@traceable(name="split_documents",tags=['splitting pdf'],metadata={'chunk_size':1000,'chunk_overlap':150})
 def split_documents(docs, chunk_size=1000, chunk_overlap=150):
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size, chunk_overlap=chunk_overlap
